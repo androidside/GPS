@@ -1,0 +1,94 @@
+package proto;
+
+option java_package = "gov.nasa.gsfc.protobuf";
+option java_outer_classname = "ThermometryPacketProtobuf";
+
+message ThermometryPacket{
+optional DSPIDMessage ds = 1;
+optional TReadMessage tr = 2;
+optional MasterMessage ms = 3;
+optional AnalogINMessage ai = 4;
+}
+
+message DSPIDMessage{
+optional int32 address = 1;
+optional string boardType = 2;
+optional int32 frameCounter = 3;
+optional string tMux = 4;
+optional int32 status = 5;
+repeated float demod = 6;
+optional float aDac = 7;
+optional int32 gDac = 8;	
+repeated float coilDAC = 9;
+optional float coilVMon = 10;
+repeated float coilIsense = 11;
+optional float analogIn = 12;
+optional float vsupply = 13;
+optional float gnd = 14;
+optional float boardTemp = 15;
+optional float externalTemp = 16;
+repeated float analogOut = 17;
+optional float pidSetPoint = 18;
+optional int32 pidError = 19;
+optional int32 pidAccumulator = 20;
+optional int32 pidP = 21;
+optional int32 pidI= 22;
+
+repeated int32 demodRaw = 23;
+optional int32 aDacRaw = 24;
+repeated int32 coilDACRaw = 25;
+optional int32 coilVMonRaw = 26;
+repeated int32 coilIsenseRaw = 27;
+optional int32 analogInRaw = 28;
+optional int32 vsupplyRaw = 29;
+optional int32 gndRaw = 30;
+optional int32 boardTempRaw = 31;
+optional int32 externalTempRaw = 32;
+repeated int32 analogOutRaw = 33;
+optional int32 pidSetPointRaw = 34;
+}
+
+message TReadMessage{
+optional int32 address = 1;
+optional string boardType = 2;
+optional int32 frameCounter = 3;
+optional string tMux = 4;
+optional int32 status = 5;
+repeated float demod = 6;
+repeated float aDac = 7;
+repeated int32 gDac = 8;
+optional int32 nsum = 9;
+repeated float temperature = 10;
+
+repeated int32 demodRaw = 11;
+repeated int32 aDacRaw = 12;
+}
+
+message MasterMessage{
+optional int32 address = 1;
+optional string boardType = 2;
+optional int32 frameCounter = 3;
+optional int32 status = 4;
+optional int32 uBCFrameCount = 5; 
+optional int32 pICFrameCount = 6;
+}
+
+message AnalogINMessage{
+optional int32 address = 1;
+optional string boardType = 2;
+optional int32 frameCounter = 3;
+optional int32 gain = 4;
+optional int32 status = 5;
+optional int32 samplesPerChannel = 6;
+optional int32 numberOfChannels = 7;
+repeated float aDC = 8;
+
+repeated int32 aDCRaw = 9;
+}
+
+
+
+
+
+
+

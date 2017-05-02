@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="javaSource"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jSSC-2.6.0-Release/guava-13.0.1.jar"/>
+	<classpathentry kind="lib" path="jSSC-2.6.0-Release/jssc.jar"/>
+	<classpathentry kind="lib" path="Libraries/protobuf-java-2.6.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

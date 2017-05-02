@@ -1,0 +1,10 @@
+FILE SAMPLE
+STATE
+NAME:      IDLE
+CONDITION: FOREVER
+MESSAGE:   Idle state.  Doing nothing.              
+STATE
+NAME:      INITIALIZE
+CMD:       s1 iramp 4100 300; S2 iramp 4100 300
+WAIT:      s1.Amps > 4050
+MESSAGE:   Ramping both coils to max current.
