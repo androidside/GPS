@@ -20,10 +20,8 @@ import jssc.SerialPort;
 
 public class GPSReaderMain
 {
-	private static final int BAUD_RATE = 9600;
 	private static final Logger sLogger = Logger.getLogger(GPSReaderMain.class.getName());
 	//Need to set port
-	private final String fPort = "COM14"; 
 
 	public GPSReaderMain(){
 

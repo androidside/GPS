@@ -54,9 +54,19 @@ public class GPSReader implements Runnable {
 					serialPort = connection.connect();
 					is = new SerialInputStream(serialPort);
 					os = new SerialOutputStream(serialPort);
+			        System.out.println("Starting NMEA Parser");
 					parser = new NMEAParser();
 				}
 
+				while(true){
+					byte b = 0;
+					if(is.read(b)!=0)
+					System.out.print(b);
+					else{
+						System.out.println("Bye!");
+						break;
+						}
+				}
 				String readCRLFLine = EagleFileUtils.readCRLFLine(is);
 				GPSPosition parse = parser.parse(readCRLFLine);
 				if (parse != null)
