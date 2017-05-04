@@ -24,6 +24,7 @@ import java.lang.*;
 public class GPSReader implements Runnable {
 
 	SerialInputStream in;
+	private float oldSecondUTC = 0;
 	private static String sSetDynamicModeAirplaneLessThan2G = String.valueOf(new char[] {0xB5, 0x62, 0x06, 0x24, 0x24, 0x00, 0xFF, 0xFF,
 			0x07, 0x03, 0x00, 0x00, 0x00, 0x00, 0x10, 0x27, 0x00, 0x00, 0x05, 0x00, 0xFA, 0x00, 0xFA, 0x00, 0x64, 0x00, 0x2C, 0x01, 0x00,
 			0x3C, 0x00, 0x00, 0x00, 0x00, 0xC8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1B, 0x4A});
@@ -54,19 +55,19 @@ public class GPSReader implements Runnable {
 					serialPort = connection.connect();
 					is = new SerialInputStream(serialPort);
 					os = new SerialOutputStream(serialPort);
-			        System.out.println("Starting NMEA Parser");
+					System.out.println("Starting NMEA Parser");
 					parser = new NMEAParser();
 				}
 
-				while(true){
-					byte b = 0;
-					if(is.read(b)!=0)
-					System.out.print(b);
-					else{
-						System.out.println("Bye!");
-						break;
-						}
-				}
+				//				while(true){
+				//					byte b = 0;
+				//					if(is.read(b)!=0)
+				//					System.out.print(b);
+				//					else{
+				//						System.out.println("Bye!");
+				//						break;
+				//						}
+				//				}
 				String readCRLFLine = EagleFileUtils.readCRLFLine(is);
 				GPSPosition parse = parser.parse(readCRLFLine);
 				if (parse != null)
@@ -76,7 +77,7 @@ public class GPSReader implements Runnable {
 					int minutes = (int) ((parse.time - hours * 10000) / 100);
 					float seconds = parse.time - hours * 10000 - minutes * 100;
 
-					GPSReadings gpsReadings = null;
+					GPSReadings gpsReadings = new GPSReadings();
 					gpsReadings.altitudeMeters = parse.altitude;
 					gpsReadings.latitudeDegrees = parse.lat;
 					gpsReadings.longitudeDegrees =  parse.lon;
@@ -84,7 +85,14 @@ public class GPSReader implements Runnable {
 					gpsReadings.minuteUTC = minutes;
 					gpsReadings.secondUTC = seconds;
 
-					parse.toString();
+				
+					if(gpsReadings.secondUTC != oldSecondUTC){
+						gpsReadings.printGpsReadings(gpsReadings);
+						parse.toString();
+						oldSecondUTC =  gpsReadings.secondUTC;
+						
+					}
+					
 
 				}
 

@@ -12,7 +12,8 @@ public class GPSReadings {
 		
 		public void printGpsReadings(GPSReadings gpsReadings){
 			
-			//System.out.println("Latitude");
+			System.out.println("Time : "+hourUTC+":"+minuteUTC+":"+secondUTC);
+			
 			
 			
 		}
